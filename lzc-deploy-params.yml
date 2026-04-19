@@ -1,0 +1,123 @@
+params:
+  - id: better_auth_secret
+    type: secret
+    name: "Better Auth Secret"
+    description: "Secret key for authentication (generate with: openssl rand -hex 32)"
+    default_value: "$random(len=32)"
+    optional: false
+
+  - id: ollama_host
+    type: string
+    name: "Ollama Host"
+    description: "Ollama instance URL (e.g., http://your-ollama:11434). Leave empty if not using Ollama."
+    default_value: ""
+    optional: true
+
+  - id: email_provider
+    type: string
+    name: "Email Provider"
+    description: "Email provider for notifications and verification (resend, mailgun, sendgrid). Leave empty to disable email."
+    default_value: ""
+    optional: true
+
+  - id: email_api_key
+    type: secret
+    name: "Email API Key"
+    description: "API key for the email provider. Required if email_provider is set."
+    default_value: ""
+    optional: true
+
+  - id: email_domain
+    type: string
+    name: "Email Domain"
+    description: "Domain for sending emails. Required if email_provider is set."
+    default_value: ""
+    optional: true
+
+  - id: email_from
+    type: string
+    name: "Email From Address"
+    description: "Sender email address. Required if email_provider is set."
+    default_value: ""
+    optional: true
+
+  - id: google_client_id
+    type: string
+    name: "Google OAuth Client ID"
+    description: "Google OAuth client ID for Google login. Leave empty to disable Google OAuth."
+    default_value: ""
+    optional: true
+
+  - id: google_client_secret
+    type: secret
+    name: "Google OAuth Client Secret"
+    description: "Google OAuth client secret. Required if google_client_id is set."
+    default_value: ""
+    optional: true
+
+  - id: github_client_id
+    type: string
+    name: "GitHub OAuth Client ID"
+    description: "GitHub OAuth client ID for GitHub login. Leave empty to disable GitHub OAuth."
+    default_value: ""
+    optional: true
+
+  - id: github_client_secret
+    type: secret
+    name: "GitHub OAuth Client Secret"
+    description: "GitHub OAuth client secret. Required if github_client_id is set."
+    default_value: ""
+    optional: true
+
+  - id: discord_client_id
+    type: string
+    name: "Discord OAuth Client ID"
+    description: "Discord OAuth client ID for Discord login. Leave empty to disable Discord OAuth."
+    default_value: ""
+    optional: true
+
+  - id: discord_client_secret
+    type: secret
+    name: "Discord OAuth Client Secret"
+    description: "Discord OAuth client secret. Required if discord_client_id is set."
+    default_value: ""
+    optional: true
+
+locales:
+  zh:
+    better_auth_secret:
+      name: "认证密钥"
+      description: "用于认证的密钥（可使用 openssl rand -hex 32 生成）"
+    ollama_host:
+      name: "Ollama 地址"
+      description: "Ollama 实例地址（如 http://your-ollama:11434）。不使用 Ollama 则留空。"
+    email_provider:
+      name: "邮件服务商"
+      description: "用于通知和验证的邮件服务商（resend, mailgun, sendgrid）。留空则禁用邮件功能。"
+    email_api_key:
+      name: "邮件 API 密钥"
+      description: "邮件服务商的 API 密钥。设置 email_provider 后必填。"
+    email_domain:
+      name: "邮件域名"
+      description: "发送邮件的域名。设置 email_provider 后必填。"
+    email_from:
+      name: "发件人地址"
+      description: "发件人邮箱地址。设置 email_provider 后必填。"
+    google_client_id:
+      name: "Google OAuth 客户端 ID"
+      description: "Google OAuth 客户端 ID。留空则禁用 Google 登录。"
+    google_client_secret:
+      name: "Google OAuth 客户端密钥"
+      description: "Google OAuth 客户端密钥。设置 google_client_id 后必填。"
+    github_client_id:
+      name: "GitHub OAuth 客户端 ID"
+      description: "GitHub OAuth 客户端 ID。留空则禁用 GitHub 登录。"
+    github_client_secret:
+      name: "GitHub OAuth 客户端密钥"
+      description: "GitHub OAuth 客户端密钥。设置 github_client_id 后必填。"
+    discord_client_id:
+      name: "Discord OAuth 客户端 ID"
+      description: "Discord OAuth 客户端 ID。留空则禁用 Discord 登录。"
+    discord_client_secret:
+      name: "Discord OAuth 客户端密钥"
+      description: "Discord OAuth 客户端密钥。设置 discord_client_id 后必填。"

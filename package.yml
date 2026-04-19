@@ -1,0 +1,25 @@
+package: community.lazycat.app.manifest
+version: 5.47.0
+name: Manifest
+description: "Smart model router for Personal AI Agents - routes requests to the cheapest model that can handle them"
+homepage: https://github.com/mnfst/manifest
+author: mnfst
+license: MIT
+min_os_version: 1.5.0
+
+unsupported_platforms:
+  - ios
+
+permissions:
+  required:
+    - net.internet
+  optional:
+    - document.read
+
+locales:
+  zh:
+    name: "Manifest"
+    description: "个人 AI 代理的智能模型路由器 - 自动将请求路由到能处理它的最便宜模型"
+  en:
+    name: "Manifest"
+    description: "Smart model router for Personal AI Agents - routes requests to the cheapest model that can handle them"
