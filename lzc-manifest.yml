@@ -79,7 +79,6 @@ application:
     # browser 阶段：登录页自动填充
     - id: login-autofill
       when:
-        - /
         - /login
       do:
         - src: builtin://simple-inject-password
@@ -92,8 +91,8 @@ application:
 
 services:
   manifest:
-    # manifestdotbuild/manifest:5.47.0
-    image: registry.lazycat.cloud/czyt/manifestdotbuild/manifest:5ae4b31a4804a09d
+    # manifestdotbuild/manifest:5.56.0
+    image: registry.lazycat.cloud/czyt/manifestdotbuild/manifest:123227ee460d2a6b
     environment:
       - DATABASE_URL=postgresql://manifest:manifest@postgres:5432/manifest
       - BETTER_AUTH_SECRET={{.U.better_auth_secret}}
