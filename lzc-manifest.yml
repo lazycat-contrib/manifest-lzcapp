@@ -2,7 +2,7 @@ application:
   subdomain: manifest
   upstreams:
     - location: /
-      backend: http://manifest:3001/
+      backend: http://manifest:2099/
   public_path:
     - /
   injects:
@@ -11,8 +11,8 @@ application:
       auth_required: false
       on: request
       when:
-        - /api/auth/sign-up
-        - /api/auth/sign-in
+        - /api/auth/sign-up/email
+        - /api/auth/sign-in/email
       do: |
         const method = String(ctx.request.method || "").toUpperCase();
         if (method !== "POST") return;
@@ -91,16 +91,23 @@ application:
 
 services:
   manifest:
-    # manifestdotbuild/manifest:5.56.0
-    image: registry.lazycat.cloud/czyt/manifestdotbuild/manifest:123227ee460d2a6b
+    # manifestdotbuild/manifest:6.18.0
+    image: docker.1ms.run/manifestdotbuild/manifest:6.18.0
     environment:
+      - PORT=2099
       - DATABASE_URL=postgresql://manifest:manifest@postgres:5432/manifest
       - BETTER_AUTH_SECRET={{.U.better_auth_secret}}
       - BETTER_AUTH_URL=https://{{.S.AppDomain}}
       - OLLAMA_HOST={{.U.ollama_host}}
+      - PROVIDER_TIMEOUT_MS=180000
+      - STREAM_WARMUP_MS=15000
+      - CODEX_SEMANTIC_OUTPUT_TIMEOUT_MS=60000
       - SEED_DATA=false
       - NODE_ENV=production
-      - AUTO_MIGRATE=true
+      - MANIFEST_MODE=selfhosted
+      - REQUEST_RECORDING_STORAGE=auto
+      - REQUEST_RECORDING_FILESYSTEM_PATH=/data/request-recordings
+      - RUN_MIGRATIONS_ON_BOOT=true
       - EMAIL_PROVIDER={{.U.email_provider}}
       - EMAIL_API_KEY={{.U.email_api_key}}
       - EMAIL_DOMAIN={{.U.email_domain}}
@@ -115,14 +122,18 @@ services:
       - postgres
     healthcheck:
       test:
-        - CMD-SHELL
-        - wget -qO- http://127.0.0.1:3001/api/v1/health || exit 1
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:2099/api/v1/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
       interval: 30s
       timeout: 5s
-      start_period: 45s
+      start_period: 90s
       retries: 3
     tmpfs:
-      - /tmp
+      - /tmp:size=64m
+    binds:
+      - /lzcapp/var/request-recordings:/data/request-recordings
 
   postgres:
     image: registry.lazycat.cloud/czyt/library/postgres:4ca568308ea2f6a8

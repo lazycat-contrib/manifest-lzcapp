@@ -11,4 +11,7 @@ compose_override:
       cap_drop:
         - ALL
       mem_limit: 1g
-      pids_limit: 256
+      pids_limit: 512
+    postgres:
+      security_opt:
+        - no-new-privileges:true
