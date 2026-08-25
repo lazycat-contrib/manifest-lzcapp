@@ -34,7 +34,6 @@ application:
         if (name) ctx.flow.set("manifest_pending_name", name);
         if (email) ctx.flow.set("manifest_pending_email", email);
         if (password) ctx.flow.set("manifest_pending_password", password);
-
     # response 阶段：成功后持久化
     - id: commit-credentials
       auth_required: false
@@ -58,7 +57,6 @@ application:
         if (typeof password === "string" && password.length > 0) {
           ctx.persist.set("manifest.password", password);
         }
-
     # browser 阶段：注册页自动填充
     - id: register-autofill
       when:
@@ -75,7 +73,6 @@ application:
             passwordKeywords:
               - password
             autoSubmit: false
-
     # browser 阶段：登录页自动填充
     - id: login-autofill
       when:
@@ -88,10 +85,10 @@ application:
             password:
               $persist: manifest.password
             autoSubmit: false
-
 services:
   manifest:
     # manifestdotbuild/manifest:6.18.0
+    # upstream: docker.io/manifestdotbuild/manifest:6.18.0
     image: docker.1ms.run/manifestdotbuild/manifest:6.18.0
     environment:
       - PORT=2099
@@ -134,7 +131,6 @@ services:
       - /tmp:size=64m
     binds:
       - /lzcapp/var/request-recordings:/data/request-recordings
-
   postgres:
     image: registry.lazycat.cloud/czyt/library/postgres:4ca568308ea2f6a8
     environment:
@@ -150,10 +146,8 @@ services:
       interval: 5s
       timeout: 3s
       retries: 5
-
 ext_config:
   enable_document_access: false
-
 usage: |
   ## 首次使用
 
