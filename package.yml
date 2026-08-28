@@ -1,5 +1,5 @@
 package: community.lazycat.app.manifest
-version: 6.19.0
+version: 6.19.1
 name: Manifest
 description: "Smart model router for Personal AI Agents - routes requests to the cheapest model that can handle them"
 homepage: https://github.com/mnfst/manifest
