@@ -88,8 +88,8 @@ application:
 services:
   manifest:
     # manifestdotbuild/manifest:6.18.0
-    # upstream: docker.io/manifestdotbuild/manifest:6.19.1
-    image: docker.1ms.run/manifestdotbuild/manifest:6.19.1
+    # upstream: docker.io/manifestdotbuild/manifest:6.20.0
+    image: docker.1ms.run/manifestdotbuild/manifest:6.20.0
     environment:
       - PORT=2099
       - DATABASE_URL=postgresql://manifest:manifest@postgres:5432/manifest
